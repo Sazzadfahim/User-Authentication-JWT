@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using UserAuthentication.Dtos;
 using UserAuthentication.Models;
 
 namespace UserAuthentication.Controllers
@@ -24,5 +25,26 @@ namespace UserAuthentication.Controllers
             _configuration = configuration;
             
         }
+
+
+
+        //Signup for Account
+        [HttpPost("sign-up")]
+
+        public async Task<IActionResult> SignUp(RegisterDto registerdto)
+        {
+
+
+
+            
+        }
+
+
+
+
+
+
+
+
     }
 }
