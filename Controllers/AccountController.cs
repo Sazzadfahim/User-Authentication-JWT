@@ -123,18 +123,18 @@ namespace UserAuthentication.Controllers
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
             var key = Encoding.ASCII.GetBytes(_configuration.GetSection("JWTSetting").GetSection("Secret").Value!);
-            
+
             var roles = _userManager.GetRolesAsync(user).Result;
 
-            List<Claim> claims = new List<Claim>
-            {
-                new Claim("Id", user.Id),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email??""),
-                new Claim(JwtRegisteredClaimNames.Name, user.Email ?? ""),
-                new Claim(JwtRegisteredClaimNames.NameId, user.Id),
-                new Claim(JwtRegisteredClaimNames.Aud, _configuration.GetSection("JWTSetting").GetSection("Audience").Value!),
-                new Claim(JwtRegisteredClaimNames.Iss, _configuration.GetSection("JWTSetting").GetSection("Issuer").Value!)
-            };
+            List<Claim> claims =
+            [
+                new ("Id", user.Id),
+                new (JwtRegisteredClaimNames.Email, user.Email??""),
+                new (JwtRegisteredClaimNames.Name, user.Email ?? ""),
+                new (JwtRegisteredClaimNames.NameId, user.Id),
+                new (JwtRegisteredClaimNames.Aud, _configuration.GetSection("JWTSetting").GetSection("Audience").Value!),
+                new (JwtRegisteredClaimNames.Iss, _configuration.GetSection("JWTSetting").GetSection("Issuer").Value!)
+            ];
 
             foreach(var role in roles)
             {
